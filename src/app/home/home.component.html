@@ -1,3 +1,36 @@
-<div class="text-2xl text-black">
-    hellooooo
+<div class="text-2xl text-black max-w-[400px] mx-auto h-screen bg-cover bg-center bg-[url('/assets/images/flower-bg.jpg')]">
+    <div class="flex flex-col items-center h-full p-5">
+        <div class="py-3 px-7 bg-[#a29a62] rounded-full border-2 border-[#b56847]">
+            <label class="text-white font-bold">Blomify</label>
+        </div>
+
+        <div class="overflow-y-scroll mt-3 scrollbar-hidden">
+            <div
+            *ngFor="let flower of flowers"
+            class="border border-gray-300 rounded-lg shadow-md p-4 bg-white mt-3"
+          >
+            <div class="h-40 bg-gray-200 flex items-center justify-center rounded-lg">
+              <img
+                *ngIf="flower.imageUrl; else placeholder"
+                [src]="flower.imageUrl"
+                [alt]="flower.name"
+                class="h-full w-full object-cover rounded-lg"
+              />
+              <ng-template #placeholder>
+                <span class="text-gray-500">No Image</span>
+              </ng-template>
+            </div>
+            <h2 class="text-lg font-bold text-gray-800 mt-3">{{ flower.name }}</h2>
+            <p class="text-sm text-gray-500 italic">{{ flower.scientificName }}</p>
+            <p class="text-sm text-gray-700 mt-2">{{ flower.description }}</p>
+            <div class="flex justify-between mt-3">
+              <span class="text-sm text-gray-600">💧 {{ flower.waterRequirement }}</span>
+              <span class="text-sm text-gray-600">☀️ {{ flower.sunlightRequirement }}</span>
+            </div>
+            <div class="mt-3 flex justify-between items-center">
+              <span class="text-lg font-semibold text-[#a29a62]">Market Price = RM{{ flower.price }}</span>
+            </div>
+        </div>
+      </div>
+    </div>
 </div>

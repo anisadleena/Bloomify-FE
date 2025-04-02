@@ -1,11 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { Flower } from "./home.type";
 import { HomeService } from "../services/home.service";
+import { CommonModule } from "@angular/common";
 
 @Component({
   selector: 'home',
   templateUrl: 'home.component.html',
   standalone: true,
+  imports: [CommonModule],
 })
 export class HomeComponent implements OnInit {
  
