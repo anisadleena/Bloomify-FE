@@ -36,6 +36,9 @@
             </div>
             <div class="mt-3 flex justify-between items-center">
               <span class="text-lg font-semibold text-[#a29a62]">Market Price = RM{{ flower.price }}</span>
+              <button (click)="deleteFlower(flower.id)">
+                <mat-icon class="text-red-600">delete_forever</mat-icon>
+              </button>
             </div>
         </div>
       </div>

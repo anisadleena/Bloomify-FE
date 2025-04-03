@@ -21,4 +21,8 @@ export class HomeService {
   addFlower(flower: Flower): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/create/flower`, flower);
   }
+
+  deleteFlower(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/delete/flower/${id}`);
+  }
 }
