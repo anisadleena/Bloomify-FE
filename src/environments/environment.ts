@@ -3,6 +3,6 @@ export const environment = {
     // production
     ANGULAR_APP_BASE_URL: 'https://drive-api-java.onrender.com/api/v1' 
     // local 
-    // ANGULAR_APP_BASE_URL: 'http://localhost:70/api/v1/' 
+    // ANGULAR_APP_BASE_URL: 'http://localhost:70/api/v1' 
   };
   

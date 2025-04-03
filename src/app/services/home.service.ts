@@ -17,4 +17,8 @@ export class HomeService {
   getAllListFlowers(): Observable<Flower[]> {
     return this.http.get<Flower[]>(`${this.baseUrl}/get/all/flower`);
   }
+
+  addFlower(flower: Flower): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/create/flower`, flower);
+  }
 }
