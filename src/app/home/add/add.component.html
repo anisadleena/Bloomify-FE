@@ -1,0 +1,74 @@
+<form [formGroup]="addForm" (ngSubmit)="save()" class="p-4">
+    <div class="flex flex-col space-y-1 overflow-y-scroll scrollbar-hidden h-[500px]">
+        <mat-label class="text-lg text-black">Name</mat-label>
+        <mat-form-field appearance="outline">
+            <input matInput placeholder="name" formControlName="name">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+    
+        <mat-label class="text-lg text-black">Type</mat-label>
+        <mat-form-field appearance="outline">
+            <input matInput placeholder="type" formControlName="type">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+
+        <mat-label class="text-lg text-black">Description</mat-label>
+        <mat-form-field appearance="outline">
+            <input matInput placeholder="description" formControlName="description">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+
+        <mat-label class="text-lg text-black">Scientific Name</mat-label>
+        <mat-form-field appearance="outline">
+            <input matInput placeholder="scientificName" formControlName="scientificName">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+
+        <mat-label class="text-lg text-black">Color</mat-label>
+        <mat-form-field appearance="outline">
+            <input matInput placeholder="color" formControlName="color">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+
+        <mat-label class="text-lg text-black">Bloom Season</mat-label>
+        <mat-form-field appearance="outline">
+            <input matInput placeholder="bloomSeason" formControlName="bloomSeason">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+
+        <mat-label class="text-lg text-black">Native Region</mat-label>
+        <mat-form-field appearance="outline">
+            <input matInput placeholder="nativeRegion" formControlName="nativeRegion">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+
+        <mat-label class="text-lg text-black">Sunlight Requirement</mat-label>
+        <mat-form-field appearance="outline">
+            <input matInput placeholder="sunlightRequirement" formControlName="sunlightRequirement">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+
+        <mat-label class="text-lg text-black">Water Requirement</mat-label>
+        <mat-form-field appearance="outline">
+            <input matInput placeholder="waterRequirement" formControlName="waterRequirement">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+
+        <mat-label class="text-lg text-black">Price</mat-label>
+        <mat-form-field appearance="outline">
+            <input matInput placeholder="price" formControlName="price" type="number" min="0">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+
+        <mat-label class="text-lg text-black">Stock Quantity</mat-label>
+        <mat-form-field appearance="outline">
+            <input matInput placeholder="stockQuantity" formControlName="stockQuantity" type="number" min="0">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+    </div>
+  
+    <div class="flex justify-end space-x-2">
+      <button mat-button type="button" (click)="close()">Cancel</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="addForm.invalid">Save</button>
+    </div>
+</form>

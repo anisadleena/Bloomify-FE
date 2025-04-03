@@ -1,5 +1,5 @@
 export interface Flower {
-    id: number;
+    id?: number;
     name: string;
     imageUrl: string;
     type: string;
@@ -12,7 +12,7 @@ export interface Flower {
     waterRequirement: string;
     price: number;
     stockQuantity: number;
-    addedDate: string; 
-    updatedDate: string | null;
+    addedDate?: string; 
+    updatedDate?: string | null;
   };
   

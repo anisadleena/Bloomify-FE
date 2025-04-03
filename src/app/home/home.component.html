@@ -1,9 +1,16 @@
-<div class="text-2xl text-black max-w-[400px] mx-auto h-screen bg-[#b56847]">
+<div class="text-2xl text-black max-w-[400px] mx-auto h-screen bg-cover bg-center bg-no-repeat bg-[url('assets/images/flower-bg.jpg')]">
     <div class="flex flex-col items-center h-full p-5">
         <div class="py-3 px-7 bg-[#a29a62] rounded-full border-2 border-[#b56847]">
             <label class="text-white font-bold">Blomify</label>
         </div>
 
+        <div class="flex justify-end w-full">
+          <button (click)="createFlower()">
+            <span class="text-lg font-bold text-green-800"> Add</span>
+            <mat-icon class="text-green-800 ml-1">library_add</mat-icon>
+          </button>
+        </div>
+        
         <div class="overflow-y-scroll mt-3 scrollbar-hidden">
             <div
             *ngFor="let flower of flowers"
