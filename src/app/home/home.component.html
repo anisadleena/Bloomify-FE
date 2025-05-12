@@ -18,8 +18,8 @@
           >
             <div class="h-40 bg-gray-200 flex items-center justify-center rounded-lg">
               <img
-                *ngIf="flower.imageUrl; else placeholder"
-                [src]="flower.imageUrl"
+                *ngIf="flower.imageData; else placeholder"
+                [src]="'data:image/png;base64,' + flower.imageData"
                 [alt]="flower.name"
                 class="h-full w-full object-cover rounded-lg"
               />
