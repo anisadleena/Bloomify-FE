@@ -2,6 +2,7 @@ export interface Flower {
     id?: number;
     name: string;
     imageUrl: string;
+    imageData?: string;
     type: string;
     description: string;
     scientificName: string;
