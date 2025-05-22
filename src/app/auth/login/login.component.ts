@@ -38,9 +38,6 @@ export class LoginComponent implements OnInit {
     if (this.addForm.invalid) return;
 
     const body = this.addForm.value;
-
-    console.log('COMPONENT TS: login = ', body);
-
     this._authService.login(body).subscribe({
       next: (response) => {
         const token = response.token;
