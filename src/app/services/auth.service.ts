@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Flower } from '../home/home.type';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,7 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
   private baseUrl = environment.ANGULAR_APP_BASE_URL;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   login(credentials: { email: string; password: string }): Observable<any> {
     console.log('SERVICE: login = ', credentials);
@@ -51,5 +52,6 @@ export class AuthService {
 
   logout(): void {
     sessionStorage.clear();
+    this.router.navigate(['/login']); 
   }
 }

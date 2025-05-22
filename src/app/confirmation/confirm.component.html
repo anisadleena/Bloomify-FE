@@ -1,0 +1,29 @@
+<div class="p-6 text-center bg-white rounded-xl shadow-xl max-w-sm mx-auto font-sans">
+  <div class="mb-4">
+    <h2 class="text-2xl font-bold text-pink-600">
+      {{ data.title || 'Are You Sure?' }}
+    </h2>
+    <p class="text-sm text-gray-600 mt-2 italic">
+      {{ data.message || 'Just making sure — do you really want to proceed?' }}
+    </p>
+  </div>
+
+  <div class="flex justify-center gap-4 mt-6">
+    <button 
+      mat-stroked-button 
+      class="border border-pink-300 text-pink-500 hover:bg-pink-50 px-4 py-1 rounded-full transition"
+      (click)="onCancel()"
+    >
+      Cancel
+    </button>
+
+    <button 
+      mat-raised-button 
+      color="warn" 
+      class="bg-pink-500 hover:bg-pink-600 text-white px-4 py-1 rounded-full shadow-md transition"
+      (click)="onConfirm()"
+    >
+      {{ data.confirmButtonText || 'Yes, Continue' }}
+    </button>
+  </div>
+</div>
