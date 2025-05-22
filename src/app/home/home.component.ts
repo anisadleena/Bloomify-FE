@@ -123,4 +123,20 @@ export class HomeComponent implements OnInit {
   );
 }
 
+onImageSelected(event: any, flowerId: any): void {
+  const file: File = event.target.files[0];
+  if (file) {
+    this._homeService.uploadImage(flowerId, file).subscribe({
+      next: () => {
+        console.log('Image uploaded successfully');
+        this.getAllListFlower(); // Refresh list to show new image
+      },
+      error: (err) => {
+        console.error('Error uploading image:', err);
+      },
+    });
+  }
+}
+
+
 }
