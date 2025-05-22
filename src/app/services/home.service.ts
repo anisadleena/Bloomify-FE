@@ -49,7 +49,7 @@ export class HomeService {
     });
   }
 
-   editFlower(flower: Flower, id : any): Observable<any> {
+  editFlower(flower: Flower, id: any): Observable<any> {
     const token = sessionStorage.getItem('jwtToken');
     console.log('SERVICE: token = ', token);
 
@@ -69,5 +69,19 @@ export class HomeService {
       Authorization: `Bearer ${token}`,
     });
     return this.http.delete(`${this.baseUrl}/delete/flower/${id}`, { headers });
+  }
+
+  uploadImage(id: any, file: File): Observable<any> {
+    const token = sessionStorage.getItem('jwtToken');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.http.post(`${this.baseUrl}/upload/image/${id}`, formData, {
+      headers,
+    });
   }
 }
