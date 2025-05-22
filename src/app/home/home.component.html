@@ -1,6 +1,15 @@
 <div
-  class="max-w-[680px] mx-auto min-h-screen bg-gradient-to-br from-[#fff5f7] to-[#f0f4f8] text-[#4b2e2e] px-5 pb-28 pt-8 font-sans"
+  class="max-w-[680px] mx-auto min-h-screen bg-gradient-to-br from-[#fff5f7] to-[#f0f4f8] text-[#4b2e2e] px-5 pb-28 pt-5 font-sans"
 >
+<div class="flex justify-end">
+  <button
+    (click)="logout()"
+    class="bg-pink-500 hover:bg-pink-600 text-white p-1 rounded"
+    aria-label="Logout"
+  >
+    <mat-icon>logout</mat-icon>
+  </button>
+</div>
   <!-- Header with script-style font -->
   <div class="text-center mb-8">
     <h1 class="text-4xl font-serif font-extrabold text-[#b76e79]">

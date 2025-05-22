@@ -5,8 +5,9 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ModalAddComponent } from './add/add.component';
-import { ConfirmDeleteComponent } from '../confirmation/delete.component';
+import { ConfirmationComponent } from '../confirmation/confirm.component';
 import { ModalEditComponent } from './edit/edit.component';
+import { AuthService } from '../services/auth.service';
 
 interface CareTips {
   waterRequirement:
@@ -33,7 +34,7 @@ interface CareTips {
 })
 export class HomeComponent implements OnInit {
   flowers: Flower[] = [];
-  constructor(public _homeService: HomeService, public dialog: MatDialog) {}
+  constructor(public _homeService: HomeService, public _authService: AuthService, public dialog: MatDialog) {}
 
   ngOnInit() {
     this.getAllListFlower();
@@ -76,11 +77,14 @@ export class HomeComponent implements OnInit {
   }
 
   deleteFlower(id: any): void {
-    const dialogRef = this.dialog.open(ConfirmDeleteComponent, {
+    const dialogRef = this.dialog.open(ConfirmationComponent, {
       width: '300px',
+      data: {
+      title: 'Confirm Delete',
+      message: 'Are you sure you want to delete this flower?',
+      confirmButtonText: 'Delete',
+    },
     });
-
-    console.log('masukk delete :', id);
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this._homeService.deleteFlower(id).subscribe(() => {
@@ -147,5 +151,22 @@ export class HomeComponent implements OnInit {
         },
       });
     }
+  }
+
+   logout(): void {
+    console.log('logout');
+   const dialogRef = this.dialog.open(ConfirmationComponent, {
+      width: '300px',
+      data: {
+      title: 'Confirm Logout',
+      message: 'Are you sure you want to log out?',
+      confirmButtonText: 'Logout',
+    },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this._authService.logout();
+      }
+    });
   }
 }
