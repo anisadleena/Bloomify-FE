@@ -1,8 +1,14 @@
-<div class="max-w-[680px] mx-auto min-h-screen bg-gradient-to-br from-[#fff5f7] to-[#f0f4f8] text-[#4b2e2e] px-5 pb-28 pt-8 font-sans">
+<div
+  class="max-w-[680px] mx-auto min-h-screen bg-gradient-to-br from-[#fff5f7] to-[#f0f4f8] text-[#4b2e2e] px-5 pb-28 pt-8 font-sans"
+>
   <!-- Header with script-style font -->
   <div class="text-center mb-8">
-    <h1 class="text-4xl font-serif font-extrabold text-[#b76e79]">🌸 Blomify 🌸</h1>
-    <p class="text-sm italic text-[#7a5a5a]">Your floral diary — preserve your petals, forever.</p>
+    <h1 class="text-4xl font-serif font-extrabold text-[#b76e79]">
+      🌸 Blomify 🌸
+    </h1>
+    <p class="text-sm italic text-[#7a5a5a]">
+      Your floral diary — preserve your petals, forever.
+    </p>
   </div>
 
   <!-- Flower Cards -->
@@ -12,7 +18,9 @@
       class="rounded-2xl bg-white/90 shadow-lg border border-[#eeced3] p-5 backdrop-blur-md transition-transform hover:scale-[1.015] duration-200"
     >
       <!-- Image section -->
-      <div class="h-52 bg-pink-50 border border-pink-100 rounded-xl overflow-hidden flex items-center justify-center">
+      <div
+        class="h-52 bg-pink-50 border border-pink-100 rounded-xl overflow-hidden flex items-center justify-center"
+      >
         <img
           *ngIf="flower.imageData; else placeholder"
           [src]="'data:image/png;base64,' + flower.imageData"
@@ -26,27 +34,48 @@
 
       <!-- Flower Details -->
       <div class="mt-4">
-        <h2 class="text-2xl font-serif font-semibold text-[#9e4b4b]">🌷 {{ flower.name }}</h2>
+        <h2 class="text-2xl font-serif font-semibold text-[#9e4b4b]">
+          🌷 {{ flower.name }}
+        </h2>
         <p class="text-sm italic text-[#7d5c5c]">{{ flower.scientificName }}</p>
         <p class="text-sm mt-2 text-[#5c4b4b]">{{ flower.description }}</p>
       </div>
 
       <!-- Attributes -->
       <div class="flex flex-wrap gap-3 mt-4 text-sm text-[#775555]">
-        <span class="bg-[#f7e0e6] px-3 py-1 rounded-full">{{ flower.sunlightRequirement }}</span>
-        <span class="bg-[#e8dff1] px-3 py-1 rounded-full">💧 {{ flower.waterRequirement }}</span>
-        <span class="bg-[#f9f2dd] px-3 py-1 rounded-full">🌸 Bloom: {{ flower.bloomSeason }}</span>
-        <span class="bg-[#e2f0ea] px-3 py-1 rounded-full">🎨 {{ flower.color }}</span>
+        <span class="bg-[#f7e0e6] px-3 py-1 rounded-full">{{
+          flower.sunlightRequirement
+        }}</span>
+        <span class="bg-[#e8dff1] px-3 py-1 rounded-full"
+          >💧 {{ flower.waterRequirement }}</span
+        >
+        <span class="bg-[#f9f2dd] px-3 py-1 rounded-full"
+          >🌸 Bloom: {{ flower.bloomSeason }}</span
+        >
+        <span class="bg-[#e2f0ea] px-3 py-1 rounded-full"
+          >🎨 {{ flower.color }}</span
+        >
       </div>
 
       <!-- AI Tip -->
-      <p class="mt-4 text-sm italic text-[#588d73]">🌼 Tip: {{ getAICareTip(flower) }}</p>
+      <p class="mt-4 text-sm italic text-[#588d73]">
+        🌼 Tip: {{ getAICareTip(flower) }}
+      </p>
 
       <!-- Price & Action -->
       <div class="mt-5 flex justify-between items-center">
-        <span class="text-lg font-bold text-[#a2785c]">RM{{ flower.price.toFixed(2) }}</span>
+        <span class="text-lg font-bold text-[#a2785c]">
+          {{
+            flower.price != null
+              ? "RM" + flower.price.toFixed(2)
+              : "Price not available"
+          }}
+        </span>
+
         <button (click)="deleteFlower(flower.id)">
-          <mat-icon class="text-red-500 hover:text-red-700">delete_forever</mat-icon>
+          <mat-icon class="text-red-500 hover:text-red-700"
+            >delete_forever</mat-icon
+          >
         </button>
       </div>
     </div>
@@ -54,7 +83,10 @@
 
   <!-- Floating Add Button with add icon -->
   <div class="fixed bottom-6 right-6 z-10">
-    <button (click)="createFlower()" class="bg-pink-500 hover:bg-pink-600 text-white p-4 rounded-full shadow-xl transition">
+    <button
+      (click)="createFlower()"
+      class="bg-pink-500 hover:bg-pink-600 text-white p-4 rounded-full shadow-xl transition"
+    >
       <mat-icon>add</mat-icon>
     </button>
   </div>
