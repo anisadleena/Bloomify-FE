@@ -17,40 +17,40 @@
       *ngFor="let flower of flowers"
       class="rounded-2xl bg-white/90 shadow-lg border border-[#eeced3] p-5 backdrop-blur-md transition-transform hover:scale-[1.015] duration-200"
     >
-<!-- Image Upload Section -->
-<div class="relative group w-full max-w-sm mx-auto">
-  <!-- Image display -->
-  <div
-    class="h-52 bg-pink-50 border-2 border-pink-200 rounded-2xl shadow-md overflow-hidden flex items-center justify-center transition-all duration-300"
-  >
-    <img
-      *ngIf="flower.imageData; else placeholder"
-      [src]="'data:image/png;base64,' + flower.imageData"
-      [alt]="flower.name"
-      class="w-full h-full object-cover rounded-2xl"
-    />
-    <ng-template #placeholder>
-      <div class="text-pink-300 text-sm italic">🌷 No Image Available</div>
-    </ng-template>
-  </div>
+      <!-- Image Upload Section -->
+      <div class="relative group w-full max-w-sm mx-auto">
+        <!-- Image display -->
+        <div
+          class="h-52 bg-pink-50 border-2 border-pink-200 rounded-2xl shadow-md overflow-hidden flex items-center justify-center transition-all duration-300"
+        >
+          <img
+            *ngIf="flower.imageData; else placeholder"
+            [src]="'data:image/png;base64,' + flower.imageData"
+            [alt]="flower.name"
+            class="w-full h-full object-cover rounded-2xl"
+          />
+          <ng-template #placeholder>
+            <div class="text-pink-300 text-sm italic">
+              🌷 No Image Available
+            </div>
+          </ng-template>
+        </div>
 
-  <!-- Floating upload button -->
-  <label
-    class="absolute bottom-2 right-2 bg-pink-500 hover:bg-pink-600 text-white text-xs px-3 py-1 rounded-full shadow-md cursor-pointer transition-all duration-200"
-  >
-    <input
-      type="file"
-      accept="image/*"
-      (change)="onImageSelected($event, flower.id)"
-      hidden
-    />
-    <span class="flex items-center gap-1">
-      <mat-icon>cloud_upload</mat-icon>
-    </span>
-  </label>
-</div>
-
-
+        <!-- Floating upload button -->
+        <label
+          class="absolute bottom-2 right-2 bg-pink-500 hover:bg-pink-600 text-white text-xs px-3 py-1 rounded-full shadow-md cursor-pointer transition-all duration-200"
+        >
+          <input
+            type="file"
+            accept="image/*"
+            (change)="onImageSelected($event, flower.id)"
+            hidden
+          />
+          <span class="flex items-center gap-1">
+            <mat-icon>cloud_upload</mat-icon>
+          </span>
+        </label>
+      </div>
 
       <!-- Flower Details -->
       <div class="mt-4">
@@ -97,7 +97,9 @@
             <mat-icon class="text-blue-500 hover:text-blue-700">edit</mat-icon>
           </button>
           <button (click)="deleteFlower(flower.id)" aria-label="Delete Flower">
-            <mat-icon class="text-red-500 hover:text-red-700">delete_forever</mat-icon>
+            <mat-icon class="text-red-500 hover:text-red-700"
+              >delete_forever</mat-icon
+            >
           </button>
         </div>
       </div>
