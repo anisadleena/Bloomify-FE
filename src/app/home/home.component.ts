@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ModalAddComponent } from './add/add.component';
 import { ConfirmDeleteComponent } from '../confirmation/delete.component';
+import { ModalEditComponent } from './edit/edit.component';
 
 interface CareTips {
   waterRequirement:
@@ -54,6 +55,19 @@ export class HomeComponent implements OnInit {
       width: '100%',
       disableClose: false,
       panelClass: 'info',
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.getAllListFlower();
+    });
+  }
+
+  EditFlower(id: any): void {
+    const dialogRef = this.dialog.open(ModalEditComponent, {
+      width: '100%',
+      disableClose: false,
+      panelClass: 'info',
+      data: { id }, 
     });
 
     dialogRef.afterClosed().subscribe(() => {

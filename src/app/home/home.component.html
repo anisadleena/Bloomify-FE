@@ -72,11 +72,14 @@
           }}
         </span>
 
-        <button (click)="deleteFlower(flower.id)">
-          <mat-icon class="text-red-500 hover:text-red-700"
-            >delete_forever</mat-icon
-          >
-        </button>
+        <div class="flex gap-2">
+          <button (click)="EditFlower(flower.id)" aria-label="Edit Flower">
+            <mat-icon class="text-blue-500 hover:text-blue-700">edit</mat-icon>
+          </button>
+          <button (click)="deleteFlower(flower.id)" aria-label="Delete Flower">
+            <mat-icon class="text-red-500 hover:text-red-700">delete_forever</mat-icon>
+          </button>
+        </div>
       </div>
     </div>
   </div>

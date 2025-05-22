@@ -7,40 +7,66 @@ import { Flower } from '../home/home.type';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HomeService {
   private baseUrl = environment.ANGULAR_APP_BASE_URL;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getAllListFlowers(): Observable<Flower[]> {
-  const token = sessionStorage.getItem('jwtToken');
-  console.log("SERVICE: token = ", token);
+    const token = sessionStorage.getItem('jwtToken');
+    console.log('SERVICE: token = ', token);
 
-  const headers = new HttpHeaders({
-    Authorization: `Bearer ${token}`
-  });
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
 
-  return this.http.get<Flower[]>(`${this.baseUrl}/get/all/flower`, { headers });
-}
+    return this.http.get<Flower[]>(`${this.baseUrl}/get/all/flower`, {
+      headers,
+    });
+  }
+
+  getFlowerById(id: any): Observable<any> {
+    const token = sessionStorage.getItem('jwtToken');
+    console.log('SERVICE: token = ', token);
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.get(`${this.baseUrl}/get/flower/${id}`, { headers });
+  }
 
   addFlower(flower: Flower): Observable<any> {
     const token = sessionStorage.getItem('jwtToken');
-    console.log("SERVICE: token = ", token);
+    console.log('SERVICE: token = ', token);
 
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     });
-    return this.http.post<any>(`${this.baseUrl}/create/flower`, flower, { headers });
+    return this.http.post<any>(`${this.baseUrl}/create/flower`, flower, {
+      headers,
+    });
   }
 
-  deleteFlower(id: number): Observable<any> {
+   editFlower(flower: Flower, id : any): Observable<any> {
     const token = sessionStorage.getItem('jwtToken');
-    console.log("SERVICE: token = ", token);
+    console.log('SERVICE: token = ', token);
 
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.put<any>(`${this.baseUrl}/update/flower/${id}`, flower, {
+      headers,
+    });
+  }
+
+  deleteFlower(id: any): Observable<any> {
+    const token = sessionStorage.getItem('jwtToken');
+    console.log('SERVICE: token = ', token);
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
     });
     return this.http.delete(`${this.baseUrl}/delete/flower/${id}`, { headers });
   }
