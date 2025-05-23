@@ -1,15 +1,15 @@
 <div
   class="max-w-[680px] mx-auto min-h-screen bg-gradient-to-br from-[#fff5f7] to-[#f0f4f8] text-[#4b2e2e] px-5 pb-28 pt-5 font-sans"
 >
-<div class="flex justify-end">
-  <button
-    (click)="logout()"
-    class="bg-pink-500 hover:bg-pink-600 text-white p-1 rounded"
-    aria-label="Logout"
-  >
-    <mat-icon>logout</mat-icon>
-  </button>
-</div>
+  <div class="flex justify-end">
+    <button
+      (click)="logout()"
+      class="bg-pink-500 hover:bg-pink-600 text-white p-1 rounded"
+      aria-label="Logout"
+    >
+      <mat-icon>logout</mat-icon>
+    </button>
+  </div>
   <!-- Header with script-style font -->
   <div class="text-center mb-8">
     <h1 class="text-4xl font-serif font-extrabold text-[#b76e79]">
@@ -22,94 +22,122 @@
 
   <!-- Flower Cards -->
   <div class="space-y-6">
+    <!-- No Data Message -->
     <div
-      *ngFor="let flower of flowers"
-      class="rounded-2xl bg-white/90 shadow-lg border border-[#eeced3] p-5 backdrop-blur-md transition-transform hover:scale-[1.015] duration-200"
+      *ngIf="flowers.length === 0"
+      class="flex flex-col justify-center items-center text-center text-[#9e4b4b] px-6 h-[60vh] bg-pink-100 rounded-2xl shadow-lg border border-pink-200 animate-fade-in"
     >
-      <!-- Image Upload Section -->
-      <div class="relative group w-full max-w-sm mx-auto">
-        <!-- Image display -->
-        <div
-          class="h-52 bg-pink-50 border-2 border-pink-200 rounded-2xl shadow-md overflow-hidden flex items-center justify-center transition-all duration-300"
-        >
-          <img
-            *ngIf="flower.imageData; else placeholder"
-            [src]="'data:image/png;base64,' + flower.imageData"
-            [alt]="flower.name"
-            class="w-full h-full object-cover rounded-2xl"
-          />
-          <ng-template #placeholder>
-            <div class="text-pink-300 text-sm italic">
-              🌷 No Image Available
-            </div>
-          </ng-template>
+      <div class="text-3xl mb-4 space-x-1 animate-bounce-slow">
+        🌻 🌼 🌸 🌷 🌺
+      </div>
+      <h2 class="text-2xl font-serif font-semibold mb-2">
+        Opss!! No flowers yet,
+      </h2>
+      <p class="text-sm italic text-[#7a5a5a]">
+        Your garden is waiting to bloom. Start by adding a new flower +
+      </p>
+      <div class="text-3xl mt-4 space-x-1 animate-bounce-slow">
+        🌻 🌼 🌸 🌷 🌺
+      </div>
+    </div>
+
+    <div *ngIf="flowers.length > 0" class="space-y-6">
+      <div
+        *ngFor="let flower of flowers"
+        class="rounded-2xl bg-white/90 shadow-lg border border-[#eeced3] p-5 backdrop-blur-md transition-transform hover:scale-[1.015] duration-200"
+      >
+        <!-- Image Upload Section -->
+        <div class="relative group w-full max-w-sm mx-auto">
+          <!-- Image display -->
+          <div
+            class="h-52 bg-pink-50 border-2 border-pink-200 rounded-2xl shadow-md overflow-hidden flex items-center justify-center transition-all duration-300"
+          >
+            <img
+              *ngIf="flower.imageUrl; else placeholder"
+              [src]="flower.imageUrl"
+              [alt]="flower.name"
+              class="w-full h-full object-cover rounded-2xl"
+            />
+            <ng-template #placeholder>
+              <div class="text-pink-300 text-sm italic">
+                🌷 No Image Available
+              </div>
+            </ng-template>
+          </div>
+
+          <!-- Floating upload button -->
+          <label
+            class="absolute bottom-2 right-2 bg-pink-500 hover:bg-pink-600 text-white text-xs px-3 py-1 rounded-full shadow-md cursor-pointer transition-all duration-200"
+          >
+            <input
+              type="file"
+              accept="image/*"
+              (change)="onImageSelected($event, flower.id)"
+              hidden
+            />
+            <span class="flex items-center gap-1">
+              <mat-icon>cloud_upload</mat-icon>
+            </span>
+          </label>
         </div>
 
-        <!-- Floating upload button -->
-        <label
-          class="absolute bottom-2 right-2 bg-pink-500 hover:bg-pink-600 text-white text-xs px-3 py-1 rounded-full shadow-md cursor-pointer transition-all duration-200"
-        >
-          <input
-            type="file"
-            accept="image/*"
-            (change)="onImageSelected($event, flower.id)"
-            hidden
-          />
-          <span class="flex items-center gap-1">
-            <mat-icon>cloud_upload</mat-icon>
+        <!-- Flower Details -->
+        <div class="mt-4">
+          <h2 class="text-2xl font-serif font-semibold text-[#9e4b4b]">
+            🌷 {{ flower.name }}
+          </h2>
+          <p class="text-sm italic text-[#7d5c5c]">
+            {{ flower.scientificName }}
+          </p>
+          <p class="text-sm mt-2 text-[#5c4b4b]">{{ flower.description }}</p>
+        </div>
+
+        <!-- Attributes -->
+        <div class="flex flex-wrap gap-3 mt-4 text-sm text-[#775555]">
+          <span class="bg-[#f7e0e6] px-3 py-1 rounded-full">{{
+            flower.sunlightRequirement
+          }}</span>
+          <span class="bg-[#e8dff1] px-3 py-1 rounded-full"
+            >💧 {{ flower.waterRequirement }}</span
+          >
+          <span class="bg-[#f9f2dd] px-3 py-1 rounded-full"
+            >🌸 Bloom: {{ flower.bloomSeason }}</span
+          >
+          <span class="bg-[#e2f0ea] px-3 py-1 rounded-full"
+            >🎨 {{ flower.color }}</span
+          >
+        </div>
+
+        <!-- AI Tip -->
+        <p class="mt-4 text-sm italic text-[#588d73]">
+          🌼 Tip: {{ getAICareTip(flower) }}
+        </p>
+
+        <!-- Price & Action -->
+        <div class="mt-5 flex justify-between items-center">
+          <span class="text-lg font-bold text-[#a2785c]">
+            {{
+              flower.price != null
+                ? "RM" + flower.price.toFixed(2)
+                : "Price not available"
+            }}
           </span>
-        </label>
-      </div>
 
-      <!-- Flower Details -->
-      <div class="mt-4">
-        <h2 class="text-2xl font-serif font-semibold text-[#9e4b4b]">
-          🌷 {{ flower.name }}
-        </h2>
-        <p class="text-sm italic text-[#7d5c5c]">{{ flower.scientificName }}</p>
-        <p class="text-sm mt-2 text-[#5c4b4b]">{{ flower.description }}</p>
-      </div>
-
-      <!-- Attributes -->
-      <div class="flex flex-wrap gap-3 mt-4 text-sm text-[#775555]">
-        <span class="bg-[#f7e0e6] px-3 py-1 rounded-full">{{
-          flower.sunlightRequirement
-        }}</span>
-        <span class="bg-[#e8dff1] px-3 py-1 rounded-full"
-          >💧 {{ flower.waterRequirement }}</span
-        >
-        <span class="bg-[#f9f2dd] px-3 py-1 rounded-full"
-          >🌸 Bloom: {{ flower.bloomSeason }}</span
-        >
-        <span class="bg-[#e2f0ea] px-3 py-1 rounded-full"
-          >🎨 {{ flower.color }}</span
-        >
-      </div>
-
-      <!-- AI Tip -->
-      <p class="mt-4 text-sm italic text-[#588d73]">
-        🌼 Tip: {{ getAICareTip(flower) }}
-      </p>
-
-      <!-- Price & Action -->
-      <div class="mt-5 flex justify-between items-center">
-        <span class="text-lg font-bold text-[#a2785c]">
-          {{
-            flower.price != null
-              ? "RM" + flower.price.toFixed(2)
-              : "Price not available"
-          }}
-        </span>
-
-        <div class="flex gap-2">
-          <button (click)="EditFlower(flower.id)" aria-label="Edit Flower">
-            <mat-icon class="text-blue-500 hover:text-blue-700">edit</mat-icon>
-          </button>
-          <button (click)="deleteFlower(flower.id)" aria-label="Delete Flower">
-            <mat-icon class="text-red-500 hover:text-red-700"
-              >delete_forever</mat-icon
+          <div class="flex gap-2">
+            <button (click)="EditFlower(flower.id)" aria-label="Edit Flower">
+              <mat-icon class="text-blue-500 hover:text-blue-700"
+                >edit</mat-icon
+              >
+            </button>
+            <button
+              (click)="deleteFlower(flower.id)"
+              aria-label="Delete Flower"
             >
-          </button>
+              <mat-icon class="text-red-500 hover:text-red-700"
+                >delete_forever</mat-icon
+              >
+            </button>
+          </div>
         </div>
       </div>
     </div>
