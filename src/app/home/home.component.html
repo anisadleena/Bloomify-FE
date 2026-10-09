@@ -1,6 +1,7 @@
 <div
   class="max-w-[680px] mx-auto min-h-screen bg-gradient-to-br from-[#fff5f7] to-[#f0f4f8] text-[#4b2e2e] px-5 pb-28 pt-5 font-sans"
 >
+  <!-- logout  -->
   <div class="flex justify-end">
     <button
       (click)="logout()"
@@ -54,7 +55,7 @@
           >
             <img
               *ngIf="flower.imageUrl; else placeholder"
-              [src]="flower.imageUrl"
+              [src]="'http://localhost:70/uploads/' + flower.imageUrl"
               [alt]="flower.name"
               class="w-full h-full object-cover rounded-2xl"
             />
