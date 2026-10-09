@@ -71,17 +71,28 @@ export class HomeService {
     return this.http.delete(`${this.baseUrl}/delete/flower/${id}`, { headers });
   }
 
-  uploadImage(id: any, file: File): Observable<any> {
-    const token = sessionStorage.getItem('jwtToken');
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
 
-    const formData = new FormData();
-    formData.append('file', file);
+uploadImage(id: any, file: File): Observable<any> {
+  const token = sessionStorage.getItem('jwtToken');
 
-    return this.http.post(`${this.baseUrl}/upload/image/${id}`, formData, {
-      headers,
-    });
-  }
+  const headers = new HttpHeaders({
+    Authorization: `Bearer ${token}`
+  });
+
+  const formData = new FormData();
+  formData.append('file', file, file.name);
+
+  // Debug the FormData contents
+  console.log('File name:', file.name);
+  console.log('File type:', file.type);
+  console.log('File size:', file.size);
+  console.log('FormData file:', formData.get('file'));
+
+  return this.http.put(
+    `${this.baseUrl}/upload/image/${id}`,
+    formData,
+    { headers }
+  );
+}
+
 }
