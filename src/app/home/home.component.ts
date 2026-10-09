@@ -34,7 +34,11 @@ interface CareTips {
 })
 export class HomeComponent implements OnInit {
   flowers: Flower[] = [];
-  constructor(public _homeService: HomeService, public _authService: AuthService, public dialog: MatDialog) {}
+  constructor(
+    public _homeService: HomeService,
+    public _authService: AuthService,
+    public dialog: MatDialog,
+  ) {}
 
   ngOnInit() {
     this.getAllListFlower();
@@ -47,7 +51,7 @@ export class HomeComponent implements OnInit {
       },
       (error: any) => {
         console.error('Error fetching flower list:', error);
-      }
+      },
     );
   }
 
@@ -80,10 +84,10 @@ export class HomeComponent implements OnInit {
     const dialogRef = this.dialog.open(ConfirmationComponent, {
       width: '300px',
       data: {
-      title: 'Confirm Delete',
-      message: 'Are you sure you want to delete this flower?',
-      confirmButtonText: 'Delete',
-    },
+        title: 'Confirm Delete',
+        message: 'Are you sure you want to delete this flower?',
+        confirmButtonText: 'Delete',
+      },
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
@@ -153,15 +157,19 @@ export class HomeComponent implements OnInit {
     }
   }
 
-   logout(): void {
+  logout(): void {
     console.log('logout');
-   const dialogRef = this.dialog.open(ConfirmationComponent, {
-      width: '300px',
+    const dialogRef = this.dialog.open(ConfirmationComponent, {
+      width: '360px',
+      maxWidth: '90vw',
+      panelClass: 'custom-confirmation-dialog',
       data: {
-      title: 'Confirm Logout',
-      message: 'Are you sure you want to log out?',
-      confirmButtonText: 'Logout',
-    },
+        title: 'Leaving So Soon? 🌸',
+        message: 'Are you sure you want to leave your flower garden gallery?',
+        confirmButtonText: 'Yes, Logout',
+        cancelButtonText: 'Stay Here',
+        type: 'logout',
+      },
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
