@@ -15,8 +15,10 @@ export class HomeService {
   constructor(private http: HttpClient) {}
 
   getAllListFlowers(): Observable<Flower[]> {
+
+    const user = sessionStorage.getItem('user');
+    const userId = user ? JSON.parse(user).id : null;
     const token = sessionStorage.getItem('jwtToken');
-    console.log('SERVICE: token = ', token);
 
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
@@ -24,12 +26,12 @@ export class HomeService {
 
     return this.http.get<Flower[]>(`${this.baseUrl}/get/all/flower`, {
       headers,
+      params: { userId },
     });
   }
 
   getFlowerById(id: any): Observable<any> {
     const token = sessionStorage.getItem('jwtToken');
-    console.log('SERVICE: token = ', token);
 
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
@@ -39,7 +41,6 @@ export class HomeService {
 
   addFlower(flower: Flower): Observable<any> {
     const token = sessionStorage.getItem('jwtToken');
-    console.log('SERVICE: token = ', token);
 
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
@@ -51,7 +52,6 @@ export class HomeService {
 
   editFlower(flower: Flower, id: any): Observable<any> {
     const token = sessionStorage.getItem('jwtToken');
-    console.log('SERVICE: token = ', token);
 
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
@@ -63,7 +63,6 @@ export class HomeService {
 
   deleteFlower(id: any): Observable<any> {
     const token = sessionStorage.getItem('jwtToken');
-    console.log('SERVICE: token = ', token);
 
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
@@ -83,9 +82,6 @@ uploadImage(id: any, file: File): Observable<any> {
   formData.append('file', file, file.name);
 
   // Debug the FormData contents
-  console.log('File name:', file.name);
-  console.log('File type:', file.type);
-  console.log('File size:', file.size);
   console.log('FormData file:', formData.get('file'));
 
   return this.http.put(
